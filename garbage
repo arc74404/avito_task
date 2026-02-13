@@ -1,0 +1,51 @@
+// func CreateSegment(db *sql.DB) http.HandlerFunc {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+
+// 		var data models.SegmentModel
+
+// 		if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
+// 			http.Error(w, `{"error": "Invalid JSON"}`, http.StatusBadRequest)
+// 			return
+// 		}
+
+// 		if _, err := db.Exec("INSERT INTO segments (slug) VALUES ($1)", data.Slug); err != nil {
+// 			http.Error(w, err.Error(), http.StatusInternalServerError)
+// 			return
+// 		}
+// 	}
+// }
+
+// func DeleteSegment(db *sql.DB) http.HandlerFunc {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+// 		vars := mux.Vars(r)
+// 		slug := vars["slug"]
+
+// 		if slug == "" {
+// 			http.Error(w, `{"error": "Slug is required"}`, http.StatusBadRequest)
+// 			return
+// 		}
+// 		result, exec_err := db.Exec("DELETE FROM segments WHERE slug = $1", slug)
+// 		if exec_err != nil {
+// 			http.Error(w, exec_err.Error(), http.StatusInternalServerError)
+// 			return
+// 		}
+
+// 		count, rows_aff_err := result.RowsAffected()
+
+// 		if rows_aff_err != nil {
+// 			http.Error(w, rows_aff_err.Error(), http.StatusInternalServerError)
+// 			return
+// 		}
+// 		if count == 0 {
+// 			http.Error(w, `{"error": "Segment not found"}`, http.StatusNotFound)
+// 			return
+// 		}
+
+// 		w.Header().Set("Content-Type", "application/json")
+
+// 		json.NewEncoder(w).Encode(map[string]string{
+// 			"status": "deleted",
+// 			"slug":   slug,
+// 		})
+// 	}
+// }
