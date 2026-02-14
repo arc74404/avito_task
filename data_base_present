@@ -1,0 +1,13 @@
+//// users /////
+1: user_id (primary_key)
+2: name
+
+//// segments ///
+1: segment_id
+2: other
+
+///// user_segments /////
+user_id INT NOT NULL,
+    segment_id INT NOT NULL,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, segment_id)

@@ -2,7 +2,11 @@ package handlers
 
 import (
 	// "avito_go/internal/models"
+	"avito_go/internal/models"
 	"database/sql"
+	"encoding/json"
+	"strconv"
+
 	// "encoding/json"
 	"net/http"
 
@@ -10,17 +14,13 @@ import (
 	_ "github.com/lib/pq"
 )
 
-
-
-func PutUserSegments(db *sql.DB) func(w http.ResponseWriter, r *http.Request) {
+func UpdateUserSegments(db *sql.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
-		slug := vars["slug"]
+		user_id, err := strconv.Atoi(vars["user_id"])
 
-		if slug == "" {
-			http.Error(w, `{"error": "Slug is required"}`, http.StatusBadRequest)
-		}
+		var data models.AddRemoveUserUpdJsonData
 
-		
+		json.NewDecoder(r.Body).Decode(&data)
 	}
 }

@@ -7,3 +7,8 @@ type SegmentModel struct {
 type UserSegments struct {
 	Segments []int `json:"segments"`
 }
+
+type AddRemoveUserUpdJsonData struct {
+	Add    []int
+	Remove []int
+}
